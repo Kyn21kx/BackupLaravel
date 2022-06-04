@@ -15,6 +15,8 @@ export default function ItemRender(props) {
 				</div>
 				<div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
 					<div class="text-center"><button class="btn btn-outline-dark mt-auto" onClick={() => buyAndAlert(props.stock.InstrumentId)}>Comprar</button></div>
+					<br/>
+					<div class="text-center"><button type="button" class="btn btn-danger" onClick={() => removeAndAlert(props.stock.InstrumentId)}>Borrar</button></div>
 				</div>
 			</div>
 		</div>
@@ -36,9 +38,17 @@ toApply.forEach(element => {
 
 function buyAndAlert(InstrumentId) {
 	console.log("Id: " + InstrumentId);
-	let form = document.getElementById("buyForm");
+	const form = document.getElementById("buyForm");
 	form.action += InstrumentId;
 	//form = addDataToForm(form, {'id': InstrumentId});
+	console.log(form);
+	form.submit();
+}
+
+function removeAndAlert(InstrumentId) {
+	console.log("Id: " + InstrumentId);
+	const form = document.getElementById("deleteForm");
+	form.action += InstrumentId;
 	console.log(form);
 	form.submit();
 }

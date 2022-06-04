@@ -2346,9 +2346,9 @@ function ItemRender(props) {
             children: ["$", (props.item.Price * 1.15).toFixed(2)]
           }), "$", props.item.Price.toFixed(2)]
         })
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
         "class": "card-footer p-4 pt-0 border-top-0 bg-transparent",
-        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
           "class": "text-center",
           children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("button", {
             "class": "btn btn-outline-dark mt-auto",
@@ -2357,7 +2357,17 @@ function ItemRender(props) {
             },
             children: "Comprar"
           })
-        })
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("br", {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
+          "class": "text-center",
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("button", {
+            type: "button",
+            "class": "btn btn-danger",
+            onClick: function onClick() {
+              return removeAndAlert(props.stock.InstrumentId);
+            },
+            children: "Borrar"
+          })
+        })]
       })]
     })
   });
@@ -2380,6 +2390,14 @@ function buyAndAlert(InstrumentId) {
   var form = document.getElementById("buyForm");
   form.action += InstrumentId; //form = addDataToForm(form, {'id': InstrumentId});
 
+  console.log(form);
+  form.submit();
+}
+
+function removeAndAlert(InstrumentId) {
+  console.log("Id: " + InstrumentId);
+  var form = document.getElementById("deleteForm");
+  form.action += InstrumentId;
   console.log(form);
   form.submit();
 }

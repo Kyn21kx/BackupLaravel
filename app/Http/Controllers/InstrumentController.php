@@ -57,6 +57,20 @@ class InstrumentController extends Controller {
 		</script>';
 	}
 
+	public function delete($id) {
+		$auxStock = InstrumentCounter::where('InstrumentId', $id)->first();
+		InstrumentCounter::destroy($auxStock->id);
+		//Here we can just query to delete it
+		Instrument::destroy($id);
+		//Alrighty, so, we need to return an alert now
+		return '
+		<script>
+			alert("Se ha eliminado el producto!");
+			window.location.replace("http://localhost:8000/");
+		</script>';
+	}
+
+	//query-------------------------------------------------------------------------------
 	public function filter() {
 		//For each category we check wether that's on or off, and we add it to the query
 		$names = [];

@@ -34,3 +34,5 @@ Route::get('instruments/getCounters', [InstrumentController::class, 'getCounters
 Route::post('instruments/buy/{id}', [InstrumentController::class, 'buy'])->name('instruments.buy');
 
 Route::post('instruments/filter', [InstrumentController::class, 'filter'])->name('instruments.filter');
+
+Route::post('instruments/delete/{id}', [InstrumentController::class, 'delete'])->name('instruments.delete');
