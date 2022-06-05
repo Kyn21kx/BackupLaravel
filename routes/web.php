@@ -4,6 +4,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\InstrumentController;
 use App\Models\Instrument; 
 use App\Models\InstrumentCounter;
+use App\Http\Controllers\UserController;
+use App\Providers\AuthServiceProvider;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,11 +19,21 @@ use App\Models\InstrumentCounter;
 */
 
 Route::get('/', function () {
+    return view('login');
+});
+
+Route::get('/landing', function () {
+	session_start();
+	if (!isset($_SESSION['token']) || !AuthServiceProvider::validToken($_SESSION['token'])) {
+		exit(401);
+	}
     return view('welcome', [				//These two are the same length
         'itemsInSale' => Instrument::all(),
         'stocksRef' => InstrumentCounter::all()
     ]);
 });
+
+Route::get('login', [UserController::class, 'login'])->name('user.login');
 
 Route::post('instruments/create', [InstrumentController::class, 'create'])->name('instruments.create');
 

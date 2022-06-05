@@ -20,7 +20,7 @@ class InstrumentController extends Controller {
 		return '
 		<script>
 			alert("Se ha creado el producto '. $toInsert->Description .'");
-			window.location.replace("http://localhost:8000/");
+			window.location.replace("http://localhost:8000/landing");
 		</script>';
 	}
 	
@@ -43,7 +43,7 @@ class InstrumentController extends Controller {
 			return '
 			<script>
 				alert("Lo lamentamos, no tenemos más existencias para este producto");
-				window.location.replace("http://localhost:8000/");
+				window.location.replace("http://localhost:8000/landing");
 			</script>';
 		}
 		$auxStock = InstrumentCounter::find($stock->id);
@@ -53,20 +53,21 @@ class InstrumentController extends Controller {
 		return '
 		<script>
 			alert("Se ha comprado el producto '. $auxStock->Sold .' veces, quedan ' . $auxStock->Available .' disponibles");
-			window.location.replace("http://localhost:8000/");
+			window.location.replace("http://localhost:8000/landing");
 		</script>';
 	}
 
 	public function delete($id) {
+		//Here we can just query to delete the counter first
 		$auxStock = InstrumentCounter::where('InstrumentId', $id)->first();
 		InstrumentCounter::destroy($auxStock->id);
-		//Here we can just query to delete it
-		Instrument::destroy($id);
+		//After that, delete the instrument
+		Instrument::where('id', $id)->delete();
 		//Alrighty, so, we need to return an alert now
 		return '
 		<script>
 			alert("Se ha eliminado el producto!");
-			window.location.replace("http://localhost:8000/");
+			window.location.replace("http://localhost:8000/landing");
 		</script>';
 	}
 
